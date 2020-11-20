@@ -38,15 +38,17 @@ def post_request(body):
     return response.json()
 
 
-if __name__ == '__main__':
+def create_body(ts_ids):
     body = {
-        "items": [
-            {
-                "id": "2251496734604682"
-            }
-        ],
+        "items": [],
         "ignoreUnknownIds": False
-        }
-    # request = get_request()
+    }
+    for id in ts_ids:
+        body['items'].append({'id': str(id)})
+    return body
+
+
+if __name__ == '__main__':
+    body = create_body([622801209626283, 2251496734604682, 3262727548303974])
     request = post_request(body)
     print(request)
