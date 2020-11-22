@@ -60,7 +60,7 @@ class TimeSeriesHook(BaseHook):
         milliseconds = seconds * 1000
         return int(milliseconds)
 
-    def get_timeseries(self, ids, start_date, end_date, **kwargs):
+    def get_time_series(self, ids, start_date, end_date, **kwargs):
         """ Fetch the data of given time series between the given dates.
 
         Args:
@@ -88,16 +88,3 @@ class TimeSeriesHook(BaseHook):
         response.raise_for_status()
 
         return response.content
-
-
-if __name__ == '__main__':
-    hook = TimeSeriesHook('cognite-api')
-    data = hook.get_timeseries(
-        ids=[622801209626283, 3262727548303974],
-        start_date='2020-11-01 12:00:00',
-        end_date='2020-11-10 12:00:00',
-        granularity='5m',
-        limit=5000,
-        aggregates=['average']
-    )
-    print(data)
